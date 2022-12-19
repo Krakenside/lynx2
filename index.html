@@ -11,9 +11,11 @@
 
 <link rel="icon" type="image/x-icon" href="/images/logo_entete.ico">
 
-
+<link href='http://fonts.googleapis.com/css?family=Mr+Dafoe' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Amaranth:700' rel='stylesheet' type='text/css'>
 <meta name=viewport content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/styles_slider.css">
 <title> Lynx-Network</title>
 <meta property=analytics-track content="Lynx-Network - Index/Tab">
 <meta property=analytics-s-channel content=homepage>
@@ -36,6 +38,500 @@
    .sf-hidden {
       display: none !important
    }
+
+   *,
+   *::before,
+   *::after {
+      box-sizing: border-box
+   }
+
+   ul {
+      padding: 0;
+      margin: 0
+   }
+
+   img {
+      max-width: 100%;
+      display: block
+   }
+
+
+   input {
+      display: none
+   }
+
+   /* input{position:absolute;left:-9999px} */
+
+   label {
+      cursor: pointer
+   }
+
+   /*on rend cliquable tous les labels*/
+
+   .slideshow {
+
+      position: relative;
+      max-width: 1085px;
+      margin: 2rem auto;
+      border: 10px solid hsla(0, 0%, 100%, .9);
+      box-shadow: 0 2px 6px hsla(0, 0%, 0%, .4)
+   }
+
+
+   .slideshow>ul {
+
+      position: relative;
+      overflow: hidden
+   }
+
+   .slideshow>ul>li {
+
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transform: translate3d(0, 0, 0);
+      /*accelere l'animation / optionnel*/
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 2s cubic-bezier(.4, 1, .2, 1)
+   }
+
+
+   .slideshow>ul>li.img1 {
+      left: 0%
+   }
+
+   .slideshow>ul>li.img2 {
+      left: 100%
+   }
+
+   .slideshow>ul>li.img3 {
+      left: 200%
+   }
+
+   .slideshow>ul>li.img4 {
+      left: 300%
+   }
+
+
+   .slideshow>#slide_img1:checked~ul>li,
+   .slideshow>#pause_img1:checked~ul>li {
+      transform: translatex(0%)
+   }
+
+
+   .slideshow>#slide_img2:checked~ul>li,
+   .slideshow>#pause_img2:checked~ul>li {
+      transform: translatex(-100%)
+   }
+
+
+   .slideshow>#slide_img3:checked~ul>li,
+   .slideshow>#pause_img3:checked~ul>li {
+      transform: translatex(-200%)
+   }
+
+
+   .slideshow>#slide_img4:checked~ul>li,
+   .slideshow>#pause_img4:checked~ul>li {
+      transform: translatex(-300%)
+   }
+
+   /*******************animation slide********************/
+   @keyframes slide {
+
+      0%,
+      13% {
+         transform: translatex(0)
+      }
+
+      25%,
+      38% {
+         transform: translatex(-100%)
+      }
+
+      50%,
+      63% {
+         transform: translatex(-200%)
+      }
+
+      75%,
+      88% {
+         transform: translatex(-300%)
+      }
+   }
+
+   /******************fleches**************************/
+
+   .slideshow>.precedent,
+   .slideshow>.suivant {
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      position: absolute;
+      top: 50%;
+      z-index: 1
+   }
+
+   .slideshow>.precedent {
+      left: 1rem
+   }
+
+   .slideshow>.suivant {
+      right: 1rem;
+   }
+
+   .slideshow>.precedent>label,
+   .slideshow>.suivant>label {
+
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      z-index: -1;
+      width: inherit;
+      height: inherit;
+      border-radius: 50%;
+      background-color: hsl(0, 0%, 15%);
+
+   }
+
+   .slideshow>.precedent>label::after {
+      content: '';
+      transform: rotate(-135deg);
+   }
+
+   .slideshow>.suivant>label::after {
+      content: '';
+      transform: rotate(45deg);
+   }
+
+   .slideshow>.precedent>label::after,
+   .slideshow>.suivant>label::after {
+
+      height: 20px;
+      width: 20px;
+      border-width: 5px 5px 0 0;
+      border-style: solid;
+      border-color: #f2f2f2;
+
+
+   }
+
+
+   .slideshow>.slide:checked~.precedent>label,
+   .slideshow>.slide:checked~.suivant>label {
+      opacity: 0;
+      z-index: -1
+   }
+
+   .slideshow>#slide_img1:checked~.precedent>label.img4,
+   .slideshow>#pause_img1:checked~.precedent>label.img4,
+   .slideshow>#slide_img1:checked~.suivant>label.img2,
+   .slideshow>#pause_img1:checked~.suivant>label.img2,
+   .slideshow>#slide_img2:checked~.precedent>label.img1,
+   .slideshow>#pause_img2:checked~.precedent>label.img1,
+   .slideshow>#slide_img2:checked~.suivant>label.img3,
+   .slideshow>#pause_img2:checked~.suivant>label.img3,
+   .slideshow>#slide_img3:checked~.precedent>label.img2,
+   .slideshow>#pause_img3:checked~.precedent>label.img2,
+   .slideshow>#slide_img3:checked~.suivant>label.img4,
+   .slideshow>#pause_img3:checked~.suivant>label.img4,
+   .slideshow>#slide_img4:checked~.precedent>label.img3,
+   .slideshow>#pause_img4:checked~.precedent>label.img3,
+   .slideshow>#slide_img4:checked~.suivant>label.img1,
+   .slideshow>#pause_img4:checked~.suivant>label.img1 {
+      opacity: 1;
+      z-index: 1
+   }
+
+
+
+   .slideshow>#play_img1:checked~.precedent>label.img4,
+   .slideshow>#play_img1:checked~.suivant>label.img2 {
+      animation: anim_fleches 17.2s infinite -2s
+   }
+
+
+   .slideshow>#play_img1:checked~.precedent>label.img1,
+   .slideshow>#play_img1:checked~.suivant>label.img3 {
+      animation: anim_fleches 17.2s infinite 2.3s
+   }
+
+
+   .slideshow>#play_img1:checked~.precedent>label.img2,
+   .slideshow>#play_img1:checked~.suivant>label.img4 {
+      animation: anim_fleches 17.2s infinite 6.6s
+   }
+
+
+   .slideshow>#play_img1:checked~.precedent>label.img3,
+   .slideshow>#play_img1:checked~.suivant>label.img1 {
+      animation: anim_fleches 17.2s infinite 10.9s
+   }
+
+
+   /* stop */
+   .slideshow>.slide:checked~.precedent>label,
+   .slideshow>.slide:checked~.suivant>label,
+   .slideshow>.pause:checked~.precedent>label,
+   .slideshow>.pause:checked~.suivant>label {
+      animation-play-state: paused
+   }
+
+   /*********************************animation fleches*************************************************/
+   @keyframes anim_fleches {
+
+      0%,
+      24.99% {
+
+         opacity: 1;
+         z-index: 1
+      }
+
+      25%,
+      100% {
+         opacity: 0;
+         z-index: -1
+      }
+
+   }
+
+
+
+   /********************bouton play/pause*************************/
+
+   .slideshow:hover {
+      animation-play-state: paused
+   }
+
+
+   .slideshow>.play_pause,
+   .slideshow>.play_pause>label {
+      position: absolute
+   }
+
+   .slideshow>.play_pause {
+
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+
+   }
+
+
+   .slideshow>#play_img1:checked~.play_pause>.pause,
+   .slideshow>.slide:checked~.play_pause>.play,
+   .slideshow>.pause:checked~.play_pause>.play {
+      display: block;
+      z-index: 1
+   }
+
+
+   .slideshow>#play_img1:checked~.play_pause>.play,
+   .slideshow>.slide:checked~.play_pause>.pause,
+   .slideshow>.pause:checked~.play_pause>.pause {
+      display: none;
+      z-index: -1
+   }
+
+   .slideshow>#play_img1:checked~.play_pause>.pause.img1,
+   .slideshow>#play_img1:checked~.play_pause>.pause.img2,
+   .slideshow>#play_img1:checked~.play_pause>.pause.img3,
+   .slideshow>#play_img1:checked~.play_pause>.pause.img4 {
+      opacity: 0;
+      z-index: -1
+   }
+
+
+
+   .slideshow>#play_img1:checked~.play_pause>.pause.img1 {
+      animation: anim_fleches 17.2s infinite -2s
+   }
+
+   .slideshow>#play_img1:checked~.play_pause>.pause.img2 {
+      animation: anim_fleches 17.2s infinite 2.3s
+   }
+
+   .slideshow>#play_img1:checked~.play_pause>.pause.img3 {
+      animation: anim_fleches 17.2s infinite 6.6s
+   }
+
+   .slideshow>#play_img1:checked~.play_pause>.pause.img4 {
+      animation: anim_fleches 17.2s infinite 10.9s
+   }
+
+
+
+   /* stop */
+   .slideshow>.slide:checked~.play_pause>.pause,
+   .slideshow>.pause:checked~.play_pause>.pause {
+      animation-play-state: paused
+   }
+
+
+   .slideshow>#play_img1:checked~ul>li {
+      animation: slide 17.2s infinite
+   }
+
+
+   .slideshow>#play_img1:checked~ul>li,
+   .slideshow>.pause:checked~ul>li {
+      transition: none
+   }
+
+   .slideshow>.play_pause {
+      transition: .4s 0s ease
+   }
+
+   .slideshow>.precedent {
+      transition: .4s .15s ease
+   }
+
+   .slideshow>.suivant {
+      transition: .4s .3s ease
+   }
+
+
+   /*apparition/disparition des fleches + bouton play/pause*/
+   .slideshow>.precedent,
+   .slideshow>.suivant,
+   .slideshow>.play_pause {
+      opacity: 0
+   }
+
+
+   .slideshow:hover>.precedent,
+   .slideshow:hover>.suivant,
+   .slideshow:hover>.play_pause {
+      opacity: 1
+   }
+
+
+   .slideshow>.play_pause>label {
+
+      margin-top: -22px;
+      margin-left: -22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      transition: .3s ease
+   }
+
+
+   .slideshow>.play_pause>.play {
+
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 485 485' style='enable-background:new 0 0 485 485' xml:space='preserve'%3E%3Cg fill='%23fff'%3E%3Cpath d='M413.974 71.026C368.171 25.225 307.274 0 242.5 0S116.829 25.225 71.026 71.026C25.225 116.829 0 177.726 0 242.5s25.225 125.671 71.026 171.474C116.829 459.775 177.726 485 242.5 485s125.671-25.225 171.474-71.026C459.775 368.171 485 307.274 485 242.5s-25.225-125.671-71.026-171.474zM242.5 455C125.327 455 30 359.673 30 242.5S125.327 30 242.5 30 455 125.327 455 242.5 359.673 455 242.5 455z'/%3E%3Cpath d='M181.062 336.575 343.938 242.5l-162.876-94.075z'/%3E%3C/g%3E%3C/svg%3E%0A");
+
+   }
+
+   .slideshow>.play_pause>.pause {
+
+      background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='iso-8859-1'%3F%3E%3C!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512;' xml:space='preserve'%3E%3Cg fill='%23fff'%3E%3Cpath d='M256,0C114.842,0,0,114.842,0,256s114.842,256,256,256s256-114.842,256-256S397.158,0,256,0z M256,465.455 c-115.493,0-209.455-93.961-209.455-209.455S140.507,46.545,256,46.545S465.455,140.507,465.455,256S371.493,465.455,256,465.455z '/%3E%3Cpath d='M318.061,139.636c-12.853,0-23.273,10.42-23.273,23.273v186.182c0,12.853,10.42,23.273,23.273,23.273 c12.853,0,23.273-10.42,23.273-23.273V162.909C341.333,150.056,330.913,139.636,318.061,139.636z'/%3E%3Cpath d='M193.939,139.636c-12.853,0-23.273,10.42-23.273,23.273v186.182c0,12.853,10.42,23.273,23.273,23.273 c12.853,0,23.273-10.42,23.273-23.273V162.909C217.212,150.056,206.792,139.636,193.939,139.636z'/%3E%3C/g%3E%3C/svg%3E%0A");
+   }
+
+
+
+
+   /***************************navigation puces bas********************************/
+   .slideshow>.puces {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      font-size: 0;
+      text-align: center;
+      bottom: .3125rem;
+   }
+
+   .slideshow>.puces>label {
+      position: relative;
+      display: inline-flex;
+      margin: 0 .625rem;
+      padding: .5rem;
+      border-radius: 50%;
+      background-color: hsla(0, 0%, 0%, .6)
+   }
+
+   /********************simulation lien actif sur les puces******************************/
+   .slideshow>.puces>label>.actif_puces {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      z-index: 1;
+      background-color: hsl(0, 0%, 100%);
+      transition: .3s ease;
+      transform: scale(0)
+   }
+
+
+   .slideshow>#slide_img1:checked~.puces>label.img1>.actif_puces,
+   .slideshow>#pause_img1:checked~.puces>label.img1>.actif_puces,
+   .slideshow>#slide_img2:checked~.puces>label.img2>.actif_puces,
+   .slideshow>#pause_img2:checked~.puces>label.img2>.actif_puces,
+   .slideshow>#slide_img3:checked~.puces>label.img3>.actif_puces,
+   .slideshow>#pause_img3:checked~.puces>label.img3>.actif_puces,
+   .slideshow>#slide_img4:checked~.puces>label.img4>.actif_puces,
+   .slideshow>#pause_img4:checked~.puces>label.img4>.actif_puces {
+      transform: scale(1)
+   }
+
+
+
+   /* bouton play -  puces */
+
+   .slideshow>#play_img1:checked~.puces>label.img1>.actif_puces {
+      animation: anim_puces 17.2s infinite -2s
+   }
+
+   .slideshow>#play_img1:checked~.puces>label.img2>.actif_puces {
+      animation: anim_puces 17.2s infinite 2.3s
+   }
+
+   .slideshow>#play_img1:checked~.puces>label.img3>.actif_puces {
+      animation: anim_puces 17.2s infinite 6.6s
+   }
+
+   .slideshow>#play_img1:checked~.puces>label.img4>.actif_puces {
+      animation: anim_puces 17.2s infinite 10.9s
+   }
+
+
+   @keyframes anim_puces {
+
+      0%,
+      24.99% {
+
+         transform: scale(1);
+         background-color: hsl(0, 0%, 100%)
+      }
+
+      25%,
+      100% {
+         transform: scale(0);
+         background-color: unset
+      }
+
+   }
+
+   .slideshow>#play_img1:checked~.puces>label>.actif_puces,
+   .slideshow>.pause:checked~.puces>label>.actif_puces {
+      transition: none
+   }
+
+   /* stop */
+
+   .slideshow>.slide:checked~.puces>label>.actif_puces,
+   .slideshow>.pause:checked~.puces>label>.actif_puces {
+      animation-play-state: paused
+   }
+
+   /********************************navigation puces bas****************************/
 </style>
 <meta http-equiv=content-security-policy
    content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:;">
@@ -48,7 +544,7 @@
 </head>
 
 <body class="page-home ac-nav-overlap" data-anim-scroll-group=body>
-   <h1 class=visuallyhidden>Apple</h1>
+   <h1 class=visuallyhidden></h1>
 
    <input type=checkbox id=ac-gn-menustate class="ac-gn-menustate sf-hidden">
    <nav id=ac-globalnav class="js no-touch windows firefox" role=navigation aria-label="Navigation générale"
@@ -67,19 +563,19 @@
          </div>
          <ul class=ac-gn-list>
             <li class="ac-gn-item ac-gn-apple">
-               <a class="ac-gn-link ac-gn-link-apple" href="#" data-analytics-title="Lynx-Network" id=ac-gn-firstfocus>
+               <a class="ac-gn-link ac-gn-link-apple" href="/" data-analytics-title="Lynx-Network" id=ac-gn-firstfocus>
                   <span class=ac-gn-link-text>Lynx-Network</span>
                </a>
             </li>
             <li class="ac-gn-item ac-gn-item-menu ac-gn-mac">
                <a class="ac-gn-link ac-gn-link-mac" href="#" data-analytics-title="Well-Securité">
-                  Well-Securité
+                  Presentation
                   <!-- <span class=ac-gn-link-text>Well-Securité</span> -->
                </a>
             </li>
             <li class="ac-gn-item ac-gn-item-menu ac-gn-ipad">
                <a class="ac-gn-link ac-gn-link-ipad" href="#" data-analytics-title="Nos Services">
-                  Nos Services
+                  Nos solutions
                   <!-- <span class=ac-gn-link-text>Nos services</span> -->
                </a>
             </li>
@@ -94,26 +590,24 @@
                   <!-- <span class=ac-gn-link-text></span> -->
                </a>
             </li>
-            <li class="ac-gn-item ac-gn-item-menu ac-gn-support">
-               <a class="ac-gn-link ac-gn-link-support" href='#' data-analytics-title=support>
-                  <span class=ac-gn-link-text>Assistance</span>
+            <li class="ac-gn-item ac-gn-item-menu ac-gn-music">
+               <a class="ac-gn-link ac-gn-link-music" href="#" data-analytics-title>
+                  Espace Client
+                  <!-- <span class=ac-gn-link-text></span> -->
                </a>
             </li>
-            <li class="ac-gn-item ac-gn-item-menu ac-gn-buy">
-               <a class="ac-gn-link ac-gn-link-buy" href="#" data-analytics-title>
-                  <span class=ac-gn-link-text>Localisation</span>
+            <li class="ac-gn-item ac-gn-item-menu ac-gn-music">
+               <a class="ac-gn-link ac-gn-link-music" href="#" data-analytics-title>
+                  F.A.Q
+                  <!-- <span class=ac-gn-link-text></span> -->
                </a>
             </li>
-            <li class="ac-gn-item ac-gn-item-menu ac-gn-search" role=search>
-               <a id=ac-gn-link-search class="ac-gn-link ac-gn-link-search" href="" data-analytics-title=search
-                  data-analytics-intrapage-link aria-label="Rechercher sur apple.com" role=button
-                  aria-haspopup=true></a>
-            </li>
-         </ul>
-         <aside id=ac-gn-searchview class="ac-gn-searchview sf-hidden" role=search data-analytics-region=search>
 
 
-         </aside>
+
+
+
+
       </div>
    </nav>
    <div class="ac-gn-blur sf-hidden"></div>
@@ -124,7 +618,7 @@
 
    <main class=main role=main>
       <section class="homepage-section collection-module" data-module-template=heroes data-analytics-region=hero>
-         <div data-unit-id=iphone-14-pro data-analytics-section-engagement=name:hero-iphone-14-pro>
+         <div data-unit-id=iphone-14-pro data-analytics-section-engagement="name:Well-Securité">
             <div class=module-content>
                <div class="unit-wrapper theme-dark">
                   <a class=unit-link href="#" target=_self rel=follow data-analytics-region="learn more"
@@ -134,8 +628,7 @@
                      <h3 class=subhead role=presentation>Plus rien ne vous échappe </h3>
                      <div class=cta-links>
                         <a class="icon icon-after icon-chevronright" href="#" target=_self rel=follow
-                           data-analytics-region="learn more" data-analytics-title="Learn more about iPhone 14 Pro"
-                           aria-label="En savoir plus sur l’iPhone 14 Pro">En savoir plus</a>
+                           data-analytics-region="learn more">En savoir plus</a>
                      </div>
                   </div>
                   <div class=unit-image-wrapper>
@@ -146,7 +639,74 @@
             </div>
          </div>
          <div data-unit-id=iphone-14 data-analytics-section-engagement=name:hero-iphone-14>
-            <div class=module-content>
+
+
+
+            <<div class=slideshow>
+               <input name="slideshow" id=slide_img1 type="radio" class=slide>
+               <input name="slideshow" id=slide_img2 type="radio" class=slide>
+               <input name="slideshow" id=slide_img3 type="radio" class=slide>
+               <input name="slideshow" id=slide_img4 type="radio" class=slide>
+               <input name="slideshow" id=play_img1 type="radio" checked>
+               <input name="slideshow" id=pause_img1 type="radio" class=pause>
+               <input name="slideshow" id=pause_img2 type="radio" class=pause>
+               <input name="slideshow" id=pause_img3 type="radio" class=pause>
+               <input name="slideshow" id=pause_img4 type="radio" class=pause>
+               <ul>
+                  <img class=cache src="1.jpg" alt>
+                  <li class=img1>
+                     <img src=1.jpg>
+                  </li>
+                  <li class=img2>
+                     <img src=2.jpg alt>
+                  </li>
+                  <li class=img3>
+                     <img src=3.jpg alt>
+                  </li>
+                  <li class=img4>
+                     <img src=4.jpg alt>
+                  </li>
+               </ul>
+               <div class=play_pause>
+                  <label class=play for=play_img1></label>
+                  <label class="pause img1" for=pause_img1></label>
+                  <label class="pause img2" for=pause_img2></label>
+                  <label class="pause img3" for=pause_img3></label>
+                  <label class="pause img4" for=pause_img4></label>
+               </div>
+               <div class=precedent>
+                  <label class=img1 for=slide_img1></label>
+                  <label class=img2 for=slide_img2></label>
+                  <label class=img3 for=slide_img3></label>
+                  <label class=img4 for=slide_img4></label>
+               </div>
+               <div class=suivant>
+                  <label class=img1 for=slide_img1></label>
+                  <label class=img2 for=slide_img2></label>
+                  <label class=img3 for=slide_img3></label>
+                  <label class=img4 for=slide_img4></label>
+               </div>
+               <div class=puces>
+                  <label class=img1 for=slide_img1>
+                     <span class=actif_puces></span>
+                  </label>
+                  <label class=img2 for=slide_img2>
+                     <span class=actif_puces></span>
+                  </label>
+                  <label class=img3 for=slide_img3>
+                     <span class=actif_puces></span>
+                  </label>
+                  <label class=img4 for=slide_img4>
+                     <span class=actif_puces></span>
+                  </label>
+               </div>
+         </div>
+
+         <!-- / end of #slideshow -->
+
+
+
+         <!-- <div class=module-content>
                <div class=unit-wrapper>
                   <a class=unit-link href="#" target=_self rel=follow data-analytics-region="learn more"
                      aria-hidden=true tabindex=-1>&nbsp;</a>
@@ -165,7 +725,8 @@
                      </figure>
                   </div>
                </div>
-            </div>
+            </div> -->
+
          </div>
          <!-- <div data-unit-id=macbook-air data-analytics-section-engagement=name:hero-macbook-air>
             <div class=module-content>
@@ -193,22 +754,28 @@
                </div>
             </div>
          </div> -->
+         <center>
+            <h2 class=headline>Nos solutions</h2>
+         </center>
       </section>
-      <!-- <section class="homepage-section collection-module" data-module-template=promos data-analytics-region=promo>
+
+      <section class="homepage-section collection-module" data-module-template=promos data-analytics-region=promo>
+
          <div data-unit-id=macbook-pro-13 data-analytics-section-engagement=name:promo-macbook-pro-13>
             <div class=module-content>
                <div class="unit-wrapper theme-dark">
                   <a class=unit-link href="#" target=_self rel=follow data-analytics-region="learn more"
                      aria-hidden=true tabindex=-1>&nbsp;</a>
                   <div class=unit-copy-wrapper>
-                     <h4 class=headline aria-label="MacBook Pro 13 pouces">Nos offres&nbsp;Domicile&nbsp;</h4>
-                    
-                        <span class=visuallyhidden>Boosté par la puce Apple&nbsp;M2</span></h5>
+                     <h4 class=headline>Video Surveillance </h4>
+                     <h5 class=subhead role=presentation> & Securité incendie</h5>
+
+
                      <div class="cta-links cta-links-mbp13">
                         <a class="icon icon-after icon-chevronright" href="#" target=_self rel=follow
                            data-analytics-region="learn more"
                            data-analytics-title="Learn more about MacBook Pro 13 inch M2 chip model"
-                           aria-label="En savoir plus sur le MacBook Pro 13 pouces avec puce M2">En savoir plus</a>
+                           aria-label="Securité incendie et Video Surveillance">En savoir plus</a>
                      </div>
                   </div>
                   <div class=unit-image-wrapper>
@@ -224,13 +791,14 @@
                   <a class=unit-link href="#" target=_self rel=follow data-analytics-region="learn more"
                      aria-hidden=true tabindex=-1>&nbsp;</a>
                   <div class=unit-copy-wrapper>
-                     <h4 class="logo-image logo-image-ipad-air-promo-logo-ipadair headline"><span
-                           class=visuallyhidden>iPad&nbsp;Air</span></h4>
-                     <h5 class=subhead role=presentation>Sous la couleur, la puissance.</h5>
+                     <h4 class="logo-image logo-image-ipad-air-promo-logo-ipadair headline"><span <h4 class=headline
+                           aria-label="access control">contrôle d'accès </h4>
+
+
                      <div class=cta-links>
                         <a class="icon icon-after icon-chevronright" href="#" target=_self rel=follow
                            data-analytics-region="learn more" data-analytics-title="Learn more about iPad Air"
-                           aria-label="En savoir plus sur l’iPad Air">En savoir plus</a>
+                           aria-label="En savoir plus sur nos offres">En savoir plus</a>
                      </div>
                   </div>
                   <div class=unit-image-wrapper>
@@ -246,13 +814,13 @@
                   <a class=unit-link href="#" target=_self rel=follow data-analytics-region="learn more"
                      aria-hidden=true tabindex=-1>&nbsp;</a>
                   <div class=unit-copy-wrapper>
-                     <h4 class="logo-image logo-image-ipad-mini-promo-logo-ipad-mini headline"><span
-                           class=visuallyhidden>iPad mini</span></h4>
-                     <h5 class=subhead role=presentation>Méga puissant. Tout&nbsp;mini.</h5>
+                     <h4 class="logo-image logo-image-ipad-mini-promo-logo-ipad-mini headline">
+                        Geolocalisation,Tracking </h4>
+                     <h5 class=subhead role=presentation>Anticipez les problèmes</h5>
                      <div class=cta-links>
                         <a class="icon icon-after icon-chevronright" href="#" target=_self rel=follow
                            data-analytics-region="learn more" data-analytics-title="Learn more about iPad mini"
-                           aria-label="En savoir plus sur l’iPad mini">En savoir plus</a>
+                           aria-label="En savoir plus sur nos offres">En savoir plus</a>
                      </div>
                   </div>
                   <div class=unit-image-wrapper>
@@ -268,16 +836,15 @@
                   <a class=unit-link href="#" target=_self rel=follow data-analytics-region="learn more"
                      aria-hidden=true tabindex=-1>&nbsp;</a>
                   <div class=unit-copy-wrapper>
-                     <span class=violator-frameless>Nouvel</span>
-                     <h4 class="logo-image logo-image-iphone-se-logo-promo-iphonese headline"><span
-                           class=visuallyhidden>iPhone&nbsp;SE</span></h4>
-                     <h5 class=subhead role=presentation>Puissance irrésistible.<br
+                     <span class=violator-frameless></span>
+                     <h4 class="logo-image logo-image-iphone-se-logo-promo-iphonese headline">Gestion du temps</h4>
+                     <h5 class=subhead role=presentation>Boostez vos performances<br
                            class="large-hide medium-show-inline small-show-inline sf-hidden">
-                        À&nbsp;prix&nbsp;irrésistible.</h5>
+                     </h5>
                      <div class=cta-links>
                         <a class="icon icon-after icon-chevronright" href="#" target=_self rel=follow
-                           data-analytics-region="learn more" data-analytics-title="Learn more about iPhone SE"
-                           aria-label="En savoir plus sur l’iPhone SE">En savoir plus</a>
+                           data-analytics-region="learn more" data-analytics-title="Learn more our offers"
+                           aria-label="En savoir plus sur NOS Offres">En savoir plus</a>
                      </div>
                   </div>
                   <div class=unit-image-wrapper>
@@ -287,7 +854,36 @@
                </div>
             </div>
          </div>
-      </section> -->
+
+      </section>
+      <section class="homepage-section collection-module" data-module-template=heroes data-analytics-region=hero>
+         <div data-unit-id=macbook-air data-analytics-section-engagement=name:hero-macbook-air>
+            <div class=module-content>
+               <div class=unit-wrapper>
+                  <a class=unit-link href="#" target=_self rel=follow data-analytics-region="learn more"
+                     aria-hidden=true tabindex=-1>&nbsp;</a>
+                  <div class=unit-copy-wrapper>
+                     <h2 class=headline>Nos partenaires </h2>
+                     <h3 class=subhead role=presentation>Depuis des années ils nous font confiance </h3>
+
+                     <h3 class="logo-image logo-image-macbook-air-logo-hero-macbookair subhead" role=text
+                        aria-label="Boosté par la puce Apple M2"><span class=visuallyhidden>Boosté par la
+                           Technologie Dahua</span></h3>
+                     <div class=cta-links>
+                        <a class="icon icon-after icon-chevronright" href="#" target=_self rel=follow
+                           data-analytics-region="learn more"
+                           data-analytics-title="Learn more about MacBook Air M2 chip model"
+                           aria-label="En savoir plus sur le MacBook Air avec puce M2">En savoir plus</a>
+                     </div>
+                  </div>
+                  <div class=unit-image-wrapper>
+                     <figure class="unit-image unit-image-macbook-air-hero-macbookair">
+                     </figure>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
    </main>
    <footer class=js id=ac-globalfooter data-analytics-region="global footer" role=contentinfo
       aria-labelledby=ac-gf-label lang=fr-CI>
